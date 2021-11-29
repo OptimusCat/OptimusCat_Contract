@@ -258,7 +258,7 @@ library CatMath {
 }
 
 /**
- * @dev Base class for the contract with some short-hand methods to access commonly accessed values
+ * @dev Base class for the contract with some short-hand methods to access common values
  */
 abstract contract Context {
     /**
@@ -894,7 +894,7 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
  * - Name = Optimus Cat
  * - Supply = 10,000,000,000,000 (10 Trillion)
  * - Decimals = 9
- * - Fees = 10 (Liq 4%, Marketing 3%, Reflection 2%, Burn 1%)
+ * - Fees = 10% on every transaction (Liquidity 4%, Marketing 3%, Reflection 2%, Burn 1%)
  */
 contract OptimusCat is Context, IERC20, Ownable {
     using CatMath for uint256;
@@ -962,15 +962,15 @@ contract OptimusCat is Context, IERC20, Ownable {
     /**
      * @dev Amount of tokens that should be sold durent a liquidity event
      * 0.1% of total supply makes this 10,000,000,000. Which is halved during the liquidity event
-     * as the pool requires equal parts contract token and pair token (OPCAT/BNB) so this will result
-     * in sell events with a token amount of 5,000,000,000 (5 Billion)
+     * as the pool requires equal parts contract token and pair token (OPCAT/BNB).
+     * Therefore, this will result in sell events with an amount of 5,000,000,000 (5 Billion) OPCAT tokens
      */
     uint256 private _numTokensSellToAddToLiquidity = 10 * 10**9 * 10**9; // 0.1% of total supply
 
     /**
      * @dev Maximum transaction amount
      * Can be changed by calling setMaxTxPercent to accomodate edge cases
-     * but cannot be put below the initial 1%
+     * but cannot be put below the initial 1%. For further info see setMaxTxPercent
      */
     uint256 public _maxTxAmount = 100 * 10**9 * 10**9; //1% of total supply
 
@@ -1760,8 +1760,8 @@ contract OptimusCat is Context, IERC20, Ownable {
     /**
      * @dev Lauch method to change TX percent post ownership resignation
      * This method prevents whales from buying up a large % at the beginning and creating huge wallets
-     * that will then scare of other future investors as it seems to de dominated by whales
-     * Cannot go under 1% as they would mean it could be a possible rugpull method
+     * that will then scare of other future investors as it seems to be dominated by whales
+     * Safeguard: Cannot go under 1% to ensure proper functioning
      */
     function setMaxTxPercent(uint256 maxTxPercent) public {
         require(
@@ -1775,7 +1775,7 @@ contract OptimusCat is Context, IERC20, Ownable {
      * @dev Lauch method to change max wallet percent post ownership resignation
      * This method prevents whales from buying up a large % at the beginning and creating huge wallets
      * that will then scare of other future investors as it seems to de dominated by whales
-     * Cannot go under 1% as they would mean it could be a possible rugpull method
+     * Safeguard: Cannot go under 1% to ensure proper functioning
      */
     function setMaxWalletPercent(uint256 maxWalletPercent) public {
         require(
