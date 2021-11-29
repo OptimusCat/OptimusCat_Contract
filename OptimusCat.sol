@@ -1759,7 +1759,7 @@ contract OptimusCat is Context, IERC20, Ownable {
 
     /**
      * @dev Lauch method to change TX percent post ownership resignation
-     * This method prevents whales from buying up a large % at the beginning and creating huge wallets
+     * This method prevents whales from buying up a large % at the beginning and creating 10%+ wallets
      * that will then scare of other future investors as it seems to be dominated by whales
      * Safeguard: Cannot go under 1% to ensure proper functioning
      */
@@ -1773,7 +1773,7 @@ contract OptimusCat is Context, IERC20, Ownable {
 
     /**
      * @dev Lauch method to change max wallet percent post ownership resignation
-     * This method prevents whales from buying up a large % at the beginning and creating huge wallets
+     * This method prevents whales from buying up a large % at the beginning and creating 10%+ wallets
      * that will then scare of other future investors as it seems to de dominated by whales
      * Safeguard: Cannot go under 1% to ensure proper functioning
      */
